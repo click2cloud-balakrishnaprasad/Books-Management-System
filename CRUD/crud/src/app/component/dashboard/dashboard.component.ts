@@ -12,7 +12,6 @@ import { EmployeeService } from 'src/app/service/employee.service';
 export class DashboardComponent implements OnInit,DoCheck {
   employeearray:any = [];
   constructor(private http: HttpClient,private empservice:EmployeeService) {}
-  emp:any=[];
   
 
   public ide:number=0;
@@ -37,7 +36,6 @@ export class DashboardComponent implements OnInit,DoCheck {
       mobilenum: salary.value,
     };
   // console.log(name.value);
-    console.log("hello");
       this.http
         .post('http://127.0.0.1:8000/api/employee/', employee)
         .subscribe((response) => {
@@ -48,10 +46,10 @@ export class DashboardComponent implements OnInit,DoCheck {
         this.empservice.getMethod().subscribe((response) => {
           this.setrecipes(response);
         });
-    console.log("hello");
     name.value='';
     emailid.value='';
     salary.value=null;
+    this.ngOnInit();
   }
 
   onEdit(eleid:number){
@@ -68,11 +66,8 @@ export class DashboardComponent implements OnInit,DoCheck {
       .subscribe((res) => {
         console.log(res);
       });
-      console.log("hello");
-      this.empservice.getMethod().subscribe((response) => {
-        console.log(response);
-        this.setrecipes(response);
-      });
+     
+ this.ngOnInit();
   }
 
   onUpdate(name:any,emailid:any,salary:any) {
@@ -90,7 +85,7 @@ export class DashboardComponent implements OnInit,DoCheck {
         console.log(response);
         this.setrecipes(response);
       });
-      this.dummy = !this.dummy; 
+      this.ngOnInit();
   }
   setrecipes(recipe: any) {
     // const resultarray[] =[];
@@ -106,8 +101,6 @@ export class DashboardComponent implements OnInit,DoCheck {
     emailid.value='';
     salary.value=null;
   }
-
-  
 
   ngDoCheck(): void {
     
